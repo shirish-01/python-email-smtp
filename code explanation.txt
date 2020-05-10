@@ -1,0 +1,45 @@
+First, we import smtplib.
+no need to download smtplib as it is inbuilt in python 3 AND 2.7
+>>> import smtplib
+Then, we set three strings- the sender’s and receiver’s email addresses and the sender’s password. Put your password for your mail ID in the string for a password.
+
+>>> sender='thesender@gmail.com'
+>>> receiver='receiver@gmail.com'
+>>> password=’<enter your password here>'
+Then, we create a server object using smptlib.SMTP(). We use the port 587 here, and the domain smtp.gmail.com.
+note: for google the port number is 587 and for yahoo it is 465 . see it thoroughly in order to avoid errors
+
+>>> smtpserver=smtplib.SMTP("smtp.gmail.com",587)
+
+
+On this, we call the ehlo() method for Extended Hello. This lets the server identify the client, and also tells it that it must use the ESMTP (Extended SMTP) Protocol.
+Read Python Datetime Module with Quick Examples
+
+>>> smtpserver.ehlo()
+Then, we call starttls() to use a transport layer security connection.
+
+>>> smtpserver.starttls()
+And then we call ehlo() again.
+
+>>> smtpserver.ehlo
+Then, we call the login() method on this server object. To this, we pass the parameters sender and password to let the client gain access from the Gmail server to send a mail.
+
+>>> smtpserver.login(sender,password)
+Then, we decide the message to send. To set the subject for the message, we do:
+
+
+>>> msg='Subject:Demo\nThis is a demo'
+Now, we call the method sendmail() to send the mail in Python. To this, we pass sender, receiver, and msg.
+
+>>> smtpserver.sendmail(sender,receiver,msg)
+Finally, we print a success receipt to the client and then exit.
+
+>>> print('Sent')
+>>> smtpserver.close() 
+#do not forget to close the smtpserver at last.
+Also, if you type in the incorrect password, you will come across this exception:
+Explore Python Variable Scope – Local, Global, Built-in, Enclosed
+
+note: turn on "less secure apps " in your google account else it does not work
+
+
